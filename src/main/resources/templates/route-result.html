@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+	<p th:text="'Origin: ' + ${route.origin.name}" />
+	<p th:text="'Destination: ' + ${route.destination.name}" />
+	<p th:text="'Traffic: ' + ${route.traffic}" />
+	<p th:text="'Total distance: ' + ${route.totalDistance}" />
+	<table>
+		<tr>
+			<th>Start</th>
+			<th>End</th>
+			<th>Distance</th>
+		</tr>
+		<tr th:each="leg: ${route.legs}">
+			<td th:text="${leg.origin.name}" />
+			<td th:text="${leg.destination.name}" />
+			<td th:text="${leg.distance}" />
+		</tr>
+	</table>
+	<a href="/route">Get new Route</a>
+</body>
+</html>

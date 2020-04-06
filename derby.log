@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Jan 30 10:53:43 CAT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-f5a7-f52d-000009f3c3e0 
+on database directory memory:D:\Dev\Discovery\Tests\2020\SP\src\billBraun\testdb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5c29bfd 
+Loaded from file:/D:/maven_repo/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.6+8-LTS
+user.dir=D:\Dev\Discovery\Tests\2020\SP\src\billBraun
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

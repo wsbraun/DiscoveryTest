@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/routecalculator/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="routecalculator" targetNamespace="http://www.example.org/routecalculator/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/routecalculator/">
+      <xsd:element name="RouteRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+
+          	<xsd:element name="Origin" type="tns:NodeSymbol"
+          		minOccurs="1" maxOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="Destination" type="tns:NodeSymbol"
+          		minOccurs="1" maxOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="Traffic" type="tns:TrafficIndicator"
+          		maxOccurs="1" minOccurs="0">
+          	</xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RouteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+
+          	<xsd:element name="Origin" type="tns:NodeType"
+          		maxOccurs="1" minOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="Destination" type="tns:NodeType"
+          		maxOccurs="1" minOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="Traffic" type="tns:TrafficIndicator"
+          		maxOccurs="1" minOccurs="0">
+          	</xsd:element>
+          	<xsd:element name="TotalDistance" type="tns:Distance"
+          		maxOccurs="1" minOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="Leg" type="tns:LegType"
+          		maxOccurs="unbounded" minOccurs="0">
+          	</xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+        
+      <xsd:simpleType name="TrafficIndicator">
+      	<xsd:restriction base="xsd:string">
+      		<xsd:enumeration value="EXCLUDED"></xsd:enumeration>
+    		<xsd:enumeration value="INCLUDED"></xsd:enumeration>
+      	</xsd:restriction>
+      </xsd:simpleType>
+    
+      <xsd:simpleType name="NodeSymbol">
+      	<xsd:restriction base="xsd:string">
+      		<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+    		<xsd:pattern value="\w.?"></xsd:pattern>
+    		<xsd:maxLength value="2"></xsd:maxLength>
+    		<xsd:minLength value="1"></xsd:minLength>
+      	</xsd:restriction>
+      </xsd:simpleType>
+    
+      <xsd:simpleType name="NodeName">
+      	<xsd:restriction base="xsd:string">
+      		<xsd:minLength value="1"></xsd:minLength>
+      		<xsd:maxLength value="30"></xsd:maxLength>
+      		<xsd:pattern value=".+"></xsd:pattern>
+      		<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+      	</xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="Distance">
+      	<xsd:restriction base="xsd:double"></xsd:restriction>
+      </xsd:simpleType>
+    
+      <xsd:complexType name="LegType">
+      	<xsd:sequence>
+      		<xsd:element name="Origin" type="tns:NodeType"
+      			minOccurs="1" maxOccurs="1">
+      		</xsd:element>
+
+      		<xsd:element name="Destination" type="tns:NodeType"
+      			minOccurs="1" maxOccurs="1">
+      		</xsd:element>
+      		<xsd:element name="Distance" type="tns:Distance" minOccurs="1" maxOccurs="1"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="NodeType">
+      	<xsd:sequence>
+      		<xsd:element name="Symbol" type="tns:NodeSymbol" minOccurs="1" maxOccurs="1"></xsd:element>
+      		<xsd:element name="Name" type="tns:NodeName" minOccurs="1" maxOccurs="1"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CalculateRouteRequest">
+    <wsdl:part element="tns:RouteRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CalculateRouteResponse">
+    <wsdl:part element="tns:RouteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="routecalculator">
+    <wsdl:operation name="CalculateRoute">
+      <wsdl:input message="tns:CalculateRouteRequest"/>
+      <wsdl:output message="tns:CalculateRouteResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="routecalculatorSOAP" type="tns:routecalculator">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CalculateRoute">
+      <soap:operation soapAction="http://www.example.org/routecalculator/CalculateRoute"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="routecalculator">
+    <wsdl:port binding="tns:routecalculatorSOAP" name="routecalculatorSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

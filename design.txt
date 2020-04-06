@@ -1,0 +1,18 @@
+Designed with spring boot which loads the xls file at startup time. This can be improved to allow Initial laod via a web service or rest call
+
+I am not really a front end designer so the front end works but is not pretty in any way.
+
+URI's:
+ List all nodes: http://localhost:8080/nodes/
+ Get individual node: http://localhost:8080/nodes/A
+ List all routes: http://localhost:8080/routes/
+ Get individual route: http://localhost:8080/routes/2
+ Create route calculation: http://localhost:8080/route/A/E?traffic=INCLUDED
+ Landing page for web: http://localhost:8080/route
+ WSDL: http://localhost:8080/ws/routecalculator.wsdl
+ SOAP Endpoint: http://localhost:8080/ws
+
+Assumptions:
+
+The traffic delay adds to the distance calculations
+Routes are bidirectional

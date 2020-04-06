@@ -1,0 +1,41 @@
+<html>
+<body>
+	<form action="#" th:action="@{/route}" th:object="${routeForm}"
+		method="post">
+		<table>
+			<tr>
+				<td>Origin:</td>
+				<td><select th:field="*{origin}">
+						<option value="">--</option>
+						<option th:each="planet : ${planets}" th:value="${planet.symbol}"
+							th:utext="${planet.name}" />
+				</select></td>
+				<td th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}">Origin
+					Error</td>
+			</tr>
+			<tr>
+				<td>Destination:</td>
+				<td><select th:field="*{destination}">
+						<option value="">--</option>
+						<option th:each="planet : ${planets}" th:value="${planet.symbol}"
+							th:utext="${planet.name}" />
+				</select></td>
+				<td th:if="${#fields.hasErrors('destination')}"
+					th:errors="*{destination}">destination Error</td>
+			</tr>
+			<tr>
+				<td>Traffic:</td>
+				<td><select th:field="*{traffic}">
+						<option th:each="i : ${traffics}" th:value="${i}" th:text="${i}"
+							th:selected="${i==traffic}"></option>
+				</select></td>
+				<td th:if="${#fields.hasErrors('traffic')}" th:errors="*{traffic}">traffic
+					Error</td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
